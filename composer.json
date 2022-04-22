@@ -1,5 +1,5 @@
 {
-    "name": "viodev/laravel-bulk-update",
+    "name": "viodev/laravel-db-bulk",
     "description": "Laravel helper for bulk insert/update records in batches.",
     "type": "library",
     "license": "MIT",
