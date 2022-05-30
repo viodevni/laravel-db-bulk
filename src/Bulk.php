@@ -14,7 +14,7 @@ class Bulk
 
         foreach (array_chunk($data, $inserts_per_query) as $chunked_inserts) {
             try {
-                DB::table($table_name)->insert($chunked_inserts;
+                DB::table($table_name)->insert($chunked_inserts);
             } catch (QueryException $e) {
                 if (!$ignore_exceptions) throw $e;
             }
