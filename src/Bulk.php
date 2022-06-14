@@ -86,12 +86,12 @@ class Bulk
         }
     }
 
-    public static function updateByIds(Builder $query, $ids, $data, $ids_per_query = 1000)
+    public static function updateByIds(Builder $query, array $ids, array $data, int $ids_per_query = 1000)
     {
         self::updateByColumnIds($query, 'id', $ids, $data, $ids_per_query);
     }
 
-    public static function updateByColumnIds(Builder $query, $column_name, $ids, $data, $ids_per_query = 1000)
+    public static function updateByColumnIds(Builder $query, string $column_name, array $ids, array $data, int $ids_per_query = 1000)
     {
         if(empty($ids)) return;
 
