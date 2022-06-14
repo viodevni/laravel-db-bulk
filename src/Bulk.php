@@ -96,7 +96,7 @@ class Bulk
         if(empty($ids)) return;
 
         foreach(array_chunk($ids, $ids_per_query) as $chunked_ids){
-            $query->clone()->whereIn($column_name, $chunked_ids->toArray())->update($data);
+            $query->clone()->whereIn($column_name, $chunked_ids)->update($data);
         }
     }
 }
