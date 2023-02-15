@@ -40,6 +40,29 @@ class Bulk
         }
     }
 
+    public static function insertReturnIds(string $table_name, array $data, int $inserts_per_query = 1000) : array
+    {
+        if(empty($data)) return [];
+
+        $keyed_data = [];
+
+        foreach (array_chunk($data, $inserts_per_query) as $chunked_inserts) {
+            DB::table($table_name)->insert($chunked_inserts);
+
+            $first_id = DB::getPdo()->lastInsertId();
+
+            foreach($chunked_inserts as $reversed_chunked_insert){
+                $keyed_data[$first_id] = array_merge([
+                    'id' => $first_id
+                ], $reversed_chunked_insert);
+
+                $first_id++;
+            }
+        }
+
+        return $keyed_data;
+    }
+
     public static function updateByCase($table_name, array $data, $updates_per_query = 1000)
     {
         if(empty($data)) return;
