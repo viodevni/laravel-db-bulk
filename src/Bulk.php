@@ -40,7 +40,7 @@ class Bulk
         }
     }
 
-    public static function insertReturnIds(string $table_name, array $data, int $inserts_per_query = 1000) : array
+    public static function insertReturnDataWithIds(string $table_name, array $data, int $inserts_per_query = 1000) : array
     {
         if(empty($data)) return [];
 
@@ -51,10 +51,10 @@ class Bulk
 
             $first_id = DB::getPdo()->lastInsertId();
 
-            foreach($chunked_inserts as $reversed_chunked_insert){
+            foreach($chunked_inserts as $chunked_insert){
                 $keyed_data[$first_id] = array_merge([
                     'id' => $first_id
-                ], $reversed_chunked_insert);
+                ], $chunked_insert);
 
                 $first_id++;
             }
